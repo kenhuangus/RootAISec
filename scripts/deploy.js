@@ -1,20 +1,21 @@
 async function main() {
-    const [deployer] = await ethers.getSigners();
-  
-    console.log("Deploying contracts with the account:", deployer.address);
-  
-    console.log("Account balance:", (await deployer.getBalance()).toString());
-  
-    const Token = await ethers.getContractFactory("Token");
-    const token = await Token.deploy();
-  
-    console.log("Token address:", token.address);
-  }
-  
-  main()
-    .then(() => process.exit(0))
-    .catch((error) => {
-      console.error(error);
-      process.exit(1);
-    });
-  
+  const [deployer] = await ethers.getSigners();
+
+  console.log("Deploying contracts with the account:", deployer.address);
+
+  const initialSupply = ethers.utils.parseUnits('1000000000', 18); // 1 billion tokens
+
+  const RootAISecToken = await ethers.getContractFactory("RootAISecToken");
+  const rootAISecToken = await RootAISecToken.deploy(initialSupply);
+
+  await rootAISecToken.deployed();
+
+  console.log("RootAISecToken deployed to:", rootAISecToken.address);
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

@@ -38,12 +38,12 @@ console.log(`Minimum gas price Testnet: ${minimumGasPriceTestnet}`);
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: '0.7.3',
+  solidity: '0.8.20',
   networks: {
     rsktestnet: {
       chainId: 31,
-      url: 'https://public-node.testnet.rsk.co/',
-      gasPrice: Math.floor(minimumGasPriceTestnet * TESTNET_GAS_MULT),
+      url: "https://rpc.testnet.rootstock.io/DimJ5HOnwd8Z9H8cEsqJ8tSeyTHtxL-T",
+      gasPrice: 60000000, // Math.floor(minimumGasPriceTestnet * TESTNET_GAS_MULT),
       gasMultiplier: TESTNET_GAS_MULT,
       accounts: {
         mnemonic: mnemonic,
