@@ -1,6 +1,5 @@
 /node_modules
 /package-lock.json
 /cache
-/artifacts
 /.minimum-gas-price-testnet.json
 /.testnet.seed-phrase
