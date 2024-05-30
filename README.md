@@ -1,51 +1,71 @@
-# Workshop Hardhat RSK
 
-## Instructions
+## RoorAISec: Automatic Smart Contract Auditing using Generative AI
 
-Follow the instructions below in a POSIX-compliant terminal.
-Where you see `code ${FILE}` this means you will need to edit that file.
-See the files committed in this repo and use them for reference.
+Welcome to the Automatic Smart Contract Auditing project! This project leverages generative AI to enable automated auditing of smart contracts. It aims to provide a comprehensive platform for security researchers and web3 project owners to enhance the security of smart contracts through collaborative efforts.
 
-```shell
-# start project
-npm init
-npm i -SDE hardhat @nomiclabs/hardhat-ethers ethers @nomiclabs/hardhat-waffle ethereum-waffle chai
+## Features
 
-# init hardhat config with defaults
-npx hardhat
-# select: Create an empty hardhat.config.js
+1. **Automated Auditing**: Use generative AI to automatically audit smart contracts, providing detailed analysis and security scores.
+2. **Security Researcher Contributions**: Security researchers can upload smart contract security checklists, auditing reports, and advanced prompts as PDFs.
+3. **Evaluation and Reward**: Uploaded documents are evaluated using a large language model (LLM) and a vector database. If the document is approved, the contributor receives 100 RootAISec tokens (symbol: RAS) as a reward.
+4. **Web3 Project Owner Audits**: Web3 project owners can upload their smart contracts for auditing and receive a security score. Initially, this service is free. Once the user base scales to 100 users, each audit will cost 100 RAS tokens.
 
-# set up for connecting to RSK Testnet
-npx mnemonics > .testnet.seed-phrase
-curl https://public-node.testnet.rsk.co/ \
-  -X POST 
-  -H "Content-Type: application/json"
-  --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false],"id":1}'
-  > .minimum-gas-price-testnet.json
-npx mnemonics > .testnet.seed-phrase
-code hardhat.config.js
+## Getting Started
 
-# create smart contract implementation and compile it
-mkdir contracts
-touch contracts/Token.sol
-code contracts/Token.sol
-npx hardhat compile
+### Prerequisites
 
-# create smart contract tests and execute them
-mkdir test
-touch test/Token.js
-code test/Token.js
-npx hardhat test
+- Node.js
+- npm (Node Package Manager)
 
-# create smart contract deployment script and dry-run the deployment
-mkdir scripts
-touch scripts/deploy.js
-code scripts/deploy.js
-npx hardhat run scripts/deploy.js
+### Installation
 
-# perform an actual deployment to RSK Testnet
-# vist htps://faucet.rsk.co/ and dispense to ${ACCOUNT_ADDRESS}
-npx hardhat run scripts/deploy.js --network rsktestnet
-# visit https://explorer.testnet.rsk.co/address/${TOKEN_ADDRESS}
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/auto-smart-contract-audit.git
+    cd auto-smart-contract-audit
+    ```
 
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+### Running the Project
+
+To run the project, use the following command:
+```bash
+npm start
 ```
+
+## Usage
+
+### Uploading Documents
+
+- **For Security Researchers**: Upload your smart contract security checklist, auditing report, or advanced prompts as a PDF. The system will evaluate your submission, and if it meets the criteria, you will receive 100 RAS tokens.
+  
+- **For Web3 Project Owners**: Upload your smart contract for auditing. You will receive a detailed security score. Initially, this service is free. Once we reach 100 users, each audit will cost 100 RAS tokens.
+
+### Rewards and Tokens
+
+- **RootAISec Tokens (RAS)**: Earn tokens by contributing valuable documents. Tokens can be used to pay for future audits once the project scales.
+
+## Contribution
+
+We welcome contributions from the community. To contribute, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add new feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Contact
+
+For any questions or inquiries, please contact us at support@auto-smart-contract-audit.com.
+
+Thank you for your interest and contributions to the Automatic Smart Contract Auditing project!
