@@ -26,16 +26,12 @@ https://rootaisec.com/
 
 ### Installation
 
-1. Clone the repository:
+Clone the repository:
     ```bash
     git clone https://github.com/kenhuangus/RootAISec
     cd RootAISec
     ```
 
-2. Install dependencies:
-    ```bash
-    npm install
-    ```
 
 ### Running the Project
 revise .env based on the sample env file 
