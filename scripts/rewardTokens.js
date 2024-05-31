@@ -11,7 +11,10 @@ async function main() {
   const rootAISecToken = RootAISecToken.attach(contractAddress);
 
   // Call the listAdmins function on the contract
-  const admins = await rootAISecToken.rewardTokens(deployer.address, 5416);
+  const admins = await rootAISecToken.rewardTokens(
+    "0x99b31DD09146955ed2F93Cd8199185Fd3cEED292",
+    100000
+  );
 
   // Log the list of admins
   console.log("Admins:", admins);
