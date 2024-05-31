@@ -33,10 +33,10 @@ Welcome to the Automatic Smart Contract Auditing project! This project leverages
     ```
 
 ### Running the Project
-
+revise .env based on the sample env file 
 To run the project, use the following command:
 ```bash
-npm start
+cd app && docker compose up -d && docker compose logs -f app
 ```
 
 ## Usage
