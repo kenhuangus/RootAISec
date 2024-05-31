@@ -14,15 +14,17 @@ Welcome to the Automatic Smart Contract Auditing project! This project leverages
 
 ### Prerequisites
 
-- Node.js
-- npm (Node Package Manager)
+- Django
+- Python (Node Package Manager)
+- RootStock blockchain (either testnet or mainnet)
+- Hardhat
 
 ### Installation
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/auto-smart-contract-audit.git
-    cd auto-smart-contract-audit
+    git clone https://github.com/kenhuangus/RootAISec
+    cd RootAISec
     ```
 
 2. Install dependencies:
