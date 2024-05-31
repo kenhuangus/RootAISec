@@ -69,6 +69,6 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-For any questions or inquiries, please contact us at support@auto-smart-contract-audit.com.
+For any questions or inquiries, please contact us at support@rootaisec.com or support@distributedapps.ai.
 
 Thank you for your interest and contributions to the Automatic Smart Contract Auditing project!
