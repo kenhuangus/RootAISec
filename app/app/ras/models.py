@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from llama_parse import LlamaParse
 import os
+import json
 import nest_asyncio
 from pypdf import PdfReader
 from vectordb import vectordb
@@ -53,16 +54,27 @@ class AuditUpload(models.Model):
         print(f'Document has {len(document)} characters')
         return document.replace('\x00', '')
 
+    def reward_tokens(self):
+        self.tx_hash = reward_tokens(self.user.wallet.address, 100000)
+        self.save()
+
     def calculate_score(self):
-        score = None
+        score = 0
         client = Client(host='http://host.docker.internal:11434')
         print('calculating score')
-        output = client.generate('rootaisec', format='json', prompt=f'What is the score of the following audit out of 100? Be sure to only respond with the score.\n{self.get_vectordb_text()}')
-        output = output['response']
+        while not score:
+            output = client.generate('rootaisec', format='json', prompt=f'What is the score of the following audit out of 100? Be sure to only respond with the score.')
+            output = output['response']
+            try:
+                output = json.loads(output)
+                score = float(output.get('score'))
+                break
+            except:
+                print('unable to get a score')
+                pass
         print(output)
-        score = output.get('score')
-        # self.score = score
-        # self.save()
+        self.score = score
+        self.save()
 
     def get_vectordb_metadata(self):
         return {'title': self.file.name}
@@ -75,6 +87,24 @@ class ContractUpload(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, models.SET_NULL, null=True, related_name='audits')
     score = models.FloatField(default=0.0)
+
+    def calculate_score(self):
+        score = 0
+        client = Client(host='http://host.docker.internal:11434')
+        print('calculating score')
+        while not score:
+            output = client.generate('rootaisec', format='json', prompt=f'What is the score of the following audit out of 100? Be sure to only respond with the score.')
+            output = output['response']
+            try:
+                output = json.loads(output)
+                score = float(output.get('score'))
+                break
+            except:
+                print('unable to get a score')
+                pass
+        print(output)
+        self.score = score
+        self.save()
 
     def __str__(self):
         return self.file.name

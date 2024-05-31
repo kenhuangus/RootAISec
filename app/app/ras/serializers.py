@@ -17,13 +17,16 @@ class AuditSerializer(serializers.Serializer):
             'address': address
         })[0]
         upload = models.AuditUpload.objects.create(file=validated_data['file'], user=wallet.user)
-        # upload.calculate_score()
-        # reward_tokens(address, 100000)
+        upload.calculate_score()
+        try:
+            upload.reward_tokens()
+        except Exception as e:
+            print(e)
         return upload
 
 
 class ContractSerializer(serializers.ModelSerializer):
-    wallet = serializers.CharField()
+    wallet = serializers.CharField(source='user.wallet.address')
     file = serializers.FileField()
     score = serializers.FloatField(read_only=True)
 
@@ -33,8 +36,10 @@ class ContractSerializer(serializers.ModelSerializer):
         read_only_fields = ('user', 'score')
 
     def create(self, validated_data):
-        wallet = models.Wallet.objects.get_or_create(address=validated_data['wallet'], defaults={
-            'address': validated_data['wallet']
+        address = validated_data['user']['wallet']['address']
+        wallet = models.Wallet.objects.get_or_create(address=address, defaults={
+            'address': address
         })[0]   
         upload = models.ContractUpload.objects.create(file=validated_data['file'], user=wallet.user)
+        upload.calculate_score()
         return upload
