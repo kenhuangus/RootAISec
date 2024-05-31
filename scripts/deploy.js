@@ -1,15 +1,17 @@
+const fs = require("fs");
 async function main() {
   const [deployer] = await ethers.getSigners();
 
   console.log("Deploying contracts with the account:", deployer.address);
 
-  const initialSupply = ethers.utils.parseUnits('1000000000', 18); // 1 billion tokens
+  const initialSupply = ethers.utils.parseUnits("1000000000", 18); // 1 billion tokens
 
   const RootAISecToken = await ethers.getContractFactory("RootAISecToken");
   const rootAISecToken = await RootAISecToken.deploy(initialSupply);
 
   await rootAISecToken.deployed();
 
+  fs.writeFileSync("contract.txt", rootAISecToken.address);
   console.log("RootAISecToken deployed to:", rootAISecToken.address);
 }
 

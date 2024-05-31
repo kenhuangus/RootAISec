@@ -1,0 +1,8 @@
+__pycache__
+*.sqlite3
+staticfiles
+.env
+.data
+media
+/parse_example.py
+/test.py

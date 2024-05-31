@@ -1,0 +1,16 @@
+django
+psycopg2-binary
+watchdog
+daphne
+gunicorn
+python-dotenv
+requests
+psutil
+llama-index
+channels
+djangorestframework
+django-vectordb[standard]
+django-cors-headers
+pypdf
+ollama
+web3

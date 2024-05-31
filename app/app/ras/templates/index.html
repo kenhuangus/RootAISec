@@ -1,0 +1,630 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- [if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif] -->
+<!-- [if IE 7 ]><html class="ie ie7" lang="en"> <![endif] -->
+<!-- [if IE 8 ]><html class="ie ie8" lang="en"> <![endif] -->
+<!-- [if (gte IE 9)|!(IE)]><! -->
+<html lang="en">
+  <!-- <![endif] -->
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!-- Primary Meta Tags -->
+    <title>$RAS | RootAiSec</title>
+    <meta name="title" content="$RAS | RootAiSec" />
+    <meta name="description" content="Leveraging Generative AI for DeFi Security on RootStock and Beyond!" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rootaisec.com/" />
+    <meta property="og:title" content="$RAS | RootAiSec" />
+    <meta property="og:description" content="Leveraging Generative AI for DeFi Security on RootStock and Beyond!" />
+    <meta property="og:image" content="https://rootaisec.com/static/img/social-3.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://rootaisec.com/" />
+    <meta property="twitter:title" content="$RAS | RootAiSec" />
+    <meta property="twitter:description" content="Leveraging Generative AI for DeFi Security on RootStock and Beyond!" />
+    <meta property="twitter:image" content="https://rootaisec.com/static/img/social-3.png" />
+
+    <!-- Meta Tags Generated with https://metatags.io -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <!-- !Google Fonts -->
+    <link rel="icon" type="image/png" href="favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+    <!-- Styles -->
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/plugins.css' %}?ver=10.0" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}?ver=10.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <style>
+      th {
+        color: white !important;
+        text-align: center;
+      }
+      
+      a {
+        color: white;
+      }
+      
+      @keyframes animate-stripes {
+        0% {
+          background-position: 0 0;
+        }
+      
+        100% {
+          background-position: 60px 0;
+        }
+      }
+      
+      @keyframes auto-progress {
+        0% {
+          width: 0%;
+        }
+      
+        100% {
+          width: 100%;
+        }
+      }
+      
+      .progress-bar {
+        background-color: #1a1a1a;
+        height: 45px;
+        width: 450px;
+        margin: 0px 10px;
+        border-radius: 5px;
+        box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+      }
+      
+      .stripes {
+        background-size: 30px 30px;
+        background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+      }
+      
+      .stripes.animated {
+        animation: animate-stripes 0.6s linear infinite;
+      }
+      
+      .stripes.animated.slower {
+        animation-duration: 1.25s;
+      }
+      
+      .stripes.reverse {
+        animation-direction: reverse;
+      }
+      
+      .progress-bar-inner {
+        display: block;
+        height: 45px;
+        width: 0%;
+        background-color: #34c2e3;
+        border-radius: 3px;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+        position: relative;
+        /* animation: auto-progress 10s infinite linear; */
+      }
+      
+      .dropzone {
+        background-color: rgba(69, 69, 69, 0.69);
+        margin: 20px auto;
+      }
+      
+      .desc {
+        margin: 20px auto;
+      }
+      
+      p {
+        color: white;
+      }
+      
+      .walletConnect {
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+    <style>
+      .walletConnect {
+        color: white;
+        cursor: pointer;
+      }
+      
+      input:disabled {
+        background-color: inherit;
+        opacity: 0.5;
+        cursor: default;
+      }
+      
+      input:disabled:hover {
+        background-color: inherit;
+      }
+    </style>
+    <!-- [if lt IE 9]> <script type="text/javascript" src="{% static 'js/modernizr.custom.js?ver=10.0' %}"></script> <![endif] -->
+    <!-- !Styles -->
+  </head>
+
+  <body>
+    <!-- Preloader -->
+    <div class="metaportal_fn_preloader">
+      <div class="loading-container">
+        <div class="loading">
+          <div class="l1">
+            <div></div>
+          </div>
+          <div class="l2">
+            <div></div>
+          </div>
+          <div class="l3">
+            <div></div>
+          </div>
+          <div class="l4">
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- !Preloader -->
+
+    <!-- Left Navigation -->
+    <div class="metaportal_fn_leftnav_closer ready"></div>
+    <div class="metaportal_fn_leftnav ready">
+      <a href="#" class="fn__closer"><span></span></a>
+      <div class="navbox">
+        <div class="list_holder">
+          <ul class="metaportal_fn_items">
+            <li>
+              <div class="item">
+                <a href="/"></a>
+                <span class="icon"><img src="{% static 'svg/logo.svg' %}" alt="" style="height: 30px;" /></span>
+                <span class="text">Root AI Sec</span>
+              </div>
+            </li>
+            <li>
+              <div class="item">
+                <a href="https://t.me/monke_wif_hat" target="_blank"></a>
+                <span class="icon"><img src="{% static 'img/market/Telegram.png' %}" alt="" /></span>
+                <span class="text">Telegram</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="nav_holder">
+          <!-- For JS -->
+          <span class="icon"><img src="{% static 'svg/down.svg' %}" alt="" class="fn__svg" /></span>
+          <!-- For JS -->
+
+          <ul>
+            <li>
+              <a href="#home"><span class="creative_link">Home</span></a>
+            </li>
+            <li>
+              <a href="#about"><span class="creative_link">About</span></a>
+            </li>
+          </ul>
+        </div>
+        <div class="info_holder">
+          <div class="copyright">
+            <p>Copyright 2024 by Root Ai Sec</p>
+          </div>
+          <div class="social_icons">
+            <ul>
+              <li>
+                <a href="http://x.com/monkewifhat28" target="_blank"><img src="{% static 'svg/social/twitter-1.svg' %}" alt="" class="fn__svg" /></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/monkewifhat_token/reels/" target="_blank"><img src="{% static 'svg/social/instagram-1.svg' %}" alt="" class="fn__svg" /></a>
+              </li>
+              <li>
+                <a href="https://www.tiktok.com/@coinonsol?_t=8kZdOKXQgkK&_r=1" target="_blank"><img src="{% static 'svg/social/Tiktok.svg' %}" alt="" class="fn__svg" /></a>
+              </li>
+              <li>
+                <a href="https://t.me/monke_wif_hat" target="_blank"><img src="{% static 'svg/social/Telegram.svg' %}" alt="" class="fn__svg" /></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- !Left Navigation -->
+
+    <!-- Main -->
+    <div class="metaportal_fn_main">
+      <!-- Mobile Navigation -->
+      <div class="metaportal_fn_mobnav">
+        <div class="mob_top">
+          <div class="social_trigger">
+            <div class="trigger">
+              <span></span>
+            </div>
+          </div>
+          <div class="wallet walletConnect">
+            <div class="metaportal_fn_button">
+              <span class="walletConnectText">Connect Wallet</span>
+            </div>
+          </div>
+        </div>
+        <div class="mob_bot">
+          <ul>
+            <li>
+              <a class="creative_link" href="#about">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- !Mobile Navigation -->
+
+      <!-- Header -->
+      <header id="header">
+        <div class="header">
+          <div class="header_in">
+            <div class="trigger_logo">
+              <div class="trigger">
+                <span></span>
+              </div>
+              <div class="logo">
+                <a href="#home"><img src="{% static 'svg/logo.svg' %}" style="height: 50px;" alt="" /></a>
+              </div>
+            </div>
+
+            <div class="nav">
+              <ul>
+                <li>
+                  <a class="creative_link" href="#home">Use RAS</a>
+                </li>
+                <li>
+                  <a class="creative_link" href="#about">About</a>
+                </li>
+                <li>
+                  <a class="creative_link" href="#faq">FAQ</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="wallet walletConnect">
+              <div class="metaportal_fn_button">
+                <span class="walletConnectText">Connect Wallet</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- !Header -->
+
+      <!-- Content -->
+      <div class="metaportal_fn_content">
+        <!-- Home Section -->
+        <section id="home" style="padding-bottom:0;">
+          <div class="container">
+            <h3 class="fn__maintitle big" data-text="ROOT AI SEC" data-align="center">ROOT AI SEC</h3>
+
+            <!-- Description -->
+            <div class="fn_cs_desc desc">
+              <p>Rootstock-Based Smart Contract AI Security System for Smart Contracts</p>
+            </div>
+            <!-- !Description -->
+
+            <!-- Dropzone -->
+            <form class="dropzone" id="fileUpload">
+              <input type="submit" value="Contribute" disabled />
+              <input type="submit" value="Request for Audit" disabled />
+            </form>
+            <!-- Dropzone -->
+            <p id="uploadResult"></p>
+          </div>
+        </section>
+        <!-- !Home Section -->
+
+        <!-- About Section -->
+        <section id="about">
+          <div class="container">
+            <h4>What is Root AI Sec?</h4>
+            <p>A cutting-edge solution designed to enhance the security of smart contracts. Our AI-driven platform continuously learns from user-submitted smart contract PDFs, rewarding contributors for their valuable inputs. By leveraging advanced machine learning algorithms, the system identifies vulnerabilities, improves its threat detection capabilities, and ensures robust contract security. Join us in creating a safer blockchain ecosystem while earning incentives for your contributions.</p>
+          </div>
+        </section>
+        <!-- !About Section -->
+
+        <!-- Section FAQ -->
+        <section id="faq">
+          <div class="container">
+            <div class="fn_cs_faq">
+              <div class="faq_col">
+                <h3 class="fn__maintitle" data-text="FAQ">FAQ</h3>
+                <div class="fn_cs_divider">
+                  <div class="divider">
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+                <div class="desc">
+                  <p>Smart contract auditing is a lot of work. Root Ai Sec is here to solve the scalability by using the security found in rootstock. This well renowned bitcoin ethereum virtual machine ensures security. The users have a chance to earn $RAS tokens by uploading audits. Root Ai Sec was founded to use GPTs to expand smart contract security audits at the same rate as new contracts. This will lower the cost and create consistency.</p>
+                </div>
+              </div>
+
+              <div class="faq_col">
+                <div class="fn_cs_accordion">
+                  <div class="acc_item active">
+                    <div class="acc_header">
+                      <h3 class="fn__maintitle" data-text="How can I earn $RAS?">How can I earn $RAS?</h3>
+                      <span class="icon"><span></span></span>
+                    </div>
+                    <div class="acc_content">
+                      <p>Smart contract auditors have a chance to earn tokens by uploading previous audits.</p>
+                    </div>
+                  </div>
+                  <div class="acc_item">
+                    <div class="acc_header">
+                      <h3 class="fn__maintitle" data-text="How does uploading audits train the gpt?">How does uploading audits train the gpt?</h3>
+                      <span class="icon"><span></span></span>
+                    </div>
+                    <div class="acc_content">
+                      <p style="font-size:medium;">The audits will be stored into a vector database which can be referred to in the future.</p>
+                    </div>
+                  </div>
+                  <div class="acc_item">
+                    <div class="acc_header">
+                      <h3 class="fn__maintitle" data-text="How much does it cost to get an audit with Root Ai Sec?">How much does it cost to get an audit with Root Ai Sec?</h3>
+                      <span class="icon"><span></span></span>
+                    </div>
+                    <div class="acc_content">
+                      <p>Initially, RAS will be free to onboard new users. Later on in the road, it will cost much less than other well known auditing systems.</p>
+                    </div>
+                  </div>
+                  <div class="acc_item">
+                    <div class="acc_header">
+                      <h3 class="fn__maintitle" data-text="Why choose Root Ai Sec?">Why choose Root Ai Sec?</h3>
+                      <span class="icon"><span></span></span>
+                    </div>
+                    <div class="acc_content">
+                      <p>You can get paid as an auditor through decentralized finance, and the AI will consistently provide thorough and stable audits.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq_col">
+                <div class="fn_cs_accordion">
+                  <div class="acc_item">
+                    <div class="acc_header">
+                      <h3 class="fn__maintitle" data-text="What is Rootstock?">What is Rootstock?</h3>
+                      <span class="icon"><span></span></span>
+                    </div>
+                    <div class="acc_content">
+                      <p>Rootstock is a bridge that has been around since 2018 to allow EVM smart contracts with Bitcoin.</p>
+                    </div>
+                  </div>
+                  <div class="acc_item">
+                    <div class="acc_header">
+                      <h3 class="fn__maintitle" data-text="What is a GPT?">What is a GPT?</h3>
+                      <span class="icon"><span></span></span>
+                    </div>
+                    <div class="acc_content">
+                      <p>GPT, or Generative Pre-trained Transformer, is a type of AI model developed by OpenAI. It's designed for natural language processing tasks like text generation, translation, and summarization. GPT is pre-trained on vast amounts of text data and can generate human-like text based on given prompts.</p>
+                    </div>
+                  </div>
+                  <div class="acc_item">
+                    <div class="acc_header">
+                      <h3 class="fn__maintitle" data-text="Can I just upload an entire project?">Can I just upload an entire project?</h3>
+                      <span class="icon"><span></span></span>
+                    </div>
+                    <div class="acc_content">
+                      <p>Yes, in the future we will accept zip folders to provide more clarity to the GPT.</p>
+                    </div>
+                  </div>
+                  <div class="acc_item">
+                    <div class="acc_header">
+                      <h3 class="fn__maintitle" data-text="Staking?">Staking?</h3>
+                      <span class="icon"><span></span></span>
+                    </div>
+                    <div class="acc_content">
+                      <p>Yes, staking will be used to help ensure serious auditors only on our platform.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- !Section FAQ -->
+
+        <!-- Footer -->
+        <footer id="footer">
+          <div class="container">
+            <div class="footer">
+              <div class="left_part">
+                <p>Copyright 2024 by Root Ai Sec</p>
+              </div>
+              <div class="right_part">
+                <ul>
+                  <li>
+                    <a class="creative_link" href="privacy-policy.html">Privacy Policy</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!-- !Footer -->
+      </div>
+      <!-- !Content -->
+
+      <!-- Social -->
+      <div id="social">
+        <div class="social">
+          <h4 class="title">Follow Us:</h4>
+          <ul>
+            <li>
+              <a href="https://t.me/monke_wif_hat" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" viewBox="0 0 64 64" class="fn__svg replaced-svg">
+                  <defs>
+                    <style>
+                      .cls-1 {
+                        fill: #777;
+                        stroke-width: 0px;
+                      }
+                    </style>
+                  </defs>
+                  <path class="cls-1" d="m32,5.42c-14.68,0-26.58,11.9-26.58,26.58,0,14.68,11.9,26.58,26.58,26.58,14.68,0,26.58-11.9,26.58-26.58,0-14.68-11.9-26.58-26.58-26.58Zm13.77,11.94c1.08-.04,1.9.94,1.46,2.69l-5.27,24.82c-.37,1.76-1.43,2.19-2.91,1.37l-8.02-5.93c-1.88,1.83-3.57,3.47-3.86,3.75-.45.44-.8.8-1.61.8-1.04,0-.86-.39-1.22-1.38l-2.95-9.05-7.71-2.41c-1.71-.52-1.73-1.7.38-2.55l30.92-11.93c.26-.12.53-.18.78-.19Zm-4.91,5.28c-.23,0-.55.08-.87.28l-17.38,10.97,2.93,8.98.58-6.18,14.89-13.43c.41-.36.25-.61-.14-.61Z"></path>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/monkewifhat28" target="_blank"></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/monkewifhat_token/reels/" target="_blank"></a>
+            </li>
+            <li>
+              <a href="https://www.tiktok.com/@coinonsol?_t=8kZdOKXQgkK&_r=1" target="_blank"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- !Social -->
+
+      <!-- Totop -->
+      <a href="#" class="metaportal_fn_totop">
+        <span class="totop_inner">
+          <span class="icon"><img src="{% static 'svg/down.svg' %}" alt="" class="fn__svg" /></span>
+          <span class="text">Scroll To Top</span>
+        </span>
+      </a>
+      <!-- /Totop -->
+    </div>
+    <!-- !Main -->
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}?ver=10.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'js/plugins.js' %}?ver=10.0"></script>
+    <script type="text/javascript" src="{% static 'js/init.js' %}?ver=10.0"></script>
+    <script type="module">
+      /* Wallet Connect */
+      document.querySelectorAll('.walletConnect').forEach((button) => {
+        button.addEventListener('click', async () => {
+          if (window.ethereum) {
+            const web3 = new Web3(window.ethereum)
+            await window.ethereum.request({ method: 'eth_requestAccounts' })
+            const accounts = await web3.eth.getAccounts()
+            document.querySelectorAll('.walletConnectText').forEach((wal) => {
+              wal.innerText = accounts[0].slice(0, 6) + '...' + accounts[0].slice(-4)
+            })
+          } else {
+            alert('Please download Metamask')
+          }
+        })
+      })
+      /* !Wallet Connect */
+      
+      /* Dropzone */
+      Dropzone.autoDiscover = false
+      
+      var myDropzone = new Dropzone('#fileUpload', {
+        url: '/',
+        autoProcessQueue: false,
+        uploadMultiple: false,
+        maxFiles: 1,
+        acceptedFiles: '.pdf,.txt,.sol',
+        addRemoveLinks: true,
+        dictMaxFilesExceeded: 'You can only upload one file',
+        init: function () {
+          this.on('maxfilesexceeded', function (file) {
+            this.removeAllFiles()
+            if (file.name.endsWith('.pdf') || file.name.endsWith('.sol') || file.name.endsWith('.txt')) {
+              this.addFile(file)
+            }
+            console.log('setting to one file')
+          })
+          this.on('addedfile', function (file) {
+            console.log('Added file', file)
+            if (file.name.endsWith('.pdf')) {
+              console.log('Enable contribute')
+              document.querySelector('#fileUpload input[value="Request for Audit"]').setAttribute('disabled', true)
+              document.querySelector('#fileUpload input[value="Contribute"]').removeAttribute('disabled')
+            } else if (file.name.endsWith('.sol') || file.name.endsWith('.txt')) {
+              console.log('Enable request for audit')
+              document.querySelector('#fileUpload input[value="Contribute"]').setAttribute('disabled', true)
+              document.querySelector('#fileUpload input[value="Request for Audit"]').removeAttribute('disabled')
+            } else {
+              this.removeAllFiles()
+              console.log('Disable both')
+              document.querySelector('#fileUpload input[value="Contribute"]').setAttribute('disabled', true)
+              document.querySelector('#fileUpload input[value="Request for Audit"]').setAttribute('disabled', true)
+            }
+          })
+        }
+      })
+      
+      document.querySelector('#fileUpload input[value="Contribute"]').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('Contribute')
+        var formData = new FormData()
+        if (myDropzone.files[0]) {
+          formData.append('file', myDropzone.files[0])
+        }
+      
+        if (window.ethereum) {
+          const web3 = new Web3(window.ethereum)
+          await window.ethereum.request({ method: 'eth_requestAccounts' })
+          const accounts = await web3.eth.getAccounts()
+          document.querySelectorAll('.walletConnectText').forEach((wal) => {
+            wal.innerText = accounts[0].slice(0, 6) + '...' + accounts[0].slice(-4)
+          })
+          formData.append('wallet', accounts[0])
+          try {
+            let result = await fetch('/api/audit/', {
+              method: 'POST',
+              body: formData
+            })
+            let data = await result.json()
+            document.querySelector('#uploadResult').innerText = 'Thank you for your contribution, the audit at hand has a score of ' + data.score + '. You have earned 100,000 $RAS tokens!'
+          } catch {}
+        } else {
+          alert('Please download Metamask')
+        }
+      })
+      
+      document.querySelector('#fileUpload input[value="Request for Audit"]').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('Request for Audit')
+        var formData = new FormData()
+        if (myDropzone.files[0]) {
+          formData.append('file', myDropzone.files[0])
+        }
+        if (window.ethereum) {
+          const web3 = new Web3(window.ethereum)
+          // Request the user to connect accounts (Metamask will prompt)
+          await window.ethereum.request({ method: 'eth_requestAccounts' })
+      
+          // Get the connected accounts
+          const accounts = await web3.eth.getAccounts()
+          formData.append('wallet', accounts[0])
+          try {
+            let result = await fetch('/api/contract/', {
+              method: 'POST',
+              body: formData
+            })
+            let data = await result.json()
+            document.querySelector('#uploadResult').innerText = 'Your contract has a score of ' + data.score
+          } catch (e) {
+            console.log(e)
+          }
+        } else {
+          alert('Please download Metamask')
+        }
+      })
+      /* !Dropzone */
+    </script>
+    <!-- !Scripts -->
+  </body>
+</html>

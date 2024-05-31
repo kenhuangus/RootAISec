@@ -7,7 +7,8 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 contract RootAISecToken is ERC20, ReentrancyGuard {
     uint256 public constant REWARD_AMOUNT = 10 * 10**18; // 10 tokens
     address creator;
-    mapping(address => bool) admins;
+    address[] public adminList; // Array to keep track of admin addresses
+    mapping(address => bool) public admins;
 
     event TokensRewarded(address indexed user, uint256 amount);
     event GuideUploaded(address indexed researcher, string guideHash);
@@ -24,17 +25,28 @@ contract RootAISecToken is ERC20, ReentrancyGuard {
     }
 
     constructor(uint256 initialSupply) ERC20("RootAISecToken", "RAS") {
-        _mint(msg.sender, initialSupply * 10**18); // Mint initial supply of tokens to contract deployer
+        _mint(msg.sender, initialSupply); // Mint initial supply of tokens to contract deployer
         creator = msg.sender;
+        admins[msg.sender] = true;
+        adminList.push(msg.sender);
+        _mint(address(this), 1000000000 * 10**18); // Mint 1 billion tokens to the contract for rewards
     }
 
     function mint(address to, uint256 amount) external onlyAdmin {
         _mint(to, amount);
     }
 
+
     function addAdmin(address admin) external onlyCreator {
+        require(!admins[admin], "Address is already an admin");
         admins[admin] = true;
+        adminList.push(admin);
     }
+
+    function listAdmins() external view returns (address[] memory) {
+        return adminList;
+    }
+
 
     function uploadGuide(string memory guideHash) external nonReentrant {
         // Assuming guideHash is a hash of the uploaded guide
@@ -48,9 +60,9 @@ contract RootAISecToken is ERC20, ReentrancyGuard {
     }
 
     function rewardTokens(address recipient, uint256 amount) external nonReentrant onlyAdmin {
-        require(balanceOf(address(this)) >= amount, "Insufficient balance in the contract to reward");
-        _transfer(address(this), recipient, amount);
-        emit TokensRewarded(recipient, amount);
+        require(balanceOf(address(this)) >= amount * 10 ** 18, "Insufficient balance in the contract to reward");
+        _transfer(address(this), recipient, amount * 10 ** 18);
+        emit TokensRewarded(recipient, amount * 10 ** 18);
     }
 
     // Function to validate uploaded guides or prompts (stub for AI validation logic)
