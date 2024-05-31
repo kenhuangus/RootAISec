@@ -2,6 +2,11 @@
 ## RootAISec: Automatic Smart Contract Auditing using Generative AI
 
 Welcome to the Automatic Smart Contract Auditing project! This project leverages generative AI to enable automated auditing of smart contracts. It aims to provide a comprehensive platform for security researchers and web3 project owners to enhance the security of smart contracts through collaborative efforts.
+Here is the project description in Canva
+https://www.canva.com/design/DAGGigW0Rzc/9AWH5pDUaj4B2pX7HFf1IA/edit
+and here is website URL:
+https://rootaisec.com/
+
 
 ## Features
 
